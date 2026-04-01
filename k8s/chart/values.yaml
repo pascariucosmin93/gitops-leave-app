@@ -34,10 +34,71 @@ backend:
       value: "sync"
     - name: GUNICORN_THREADS
       value: "2"
-    - name: METRICS_PRIMARY
-      value: "1"
-    - name: DB_POOL_SIZE
-      value: "8"
+    - name: POSTGRES_HOST
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: POSTGRES_HOST
+    - name: POSTGRES_PORT
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: POSTGRES_PORT
+    - name: POSTGRES_DB
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: POSTGRES_DB
+    - name: POSTGRES_USER
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: POSTGRES_USER
+    - name: POSTGRES_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: POSTGRES_PASSWORD
+    - name: DATABASE_URL
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: DATABASE_URL
+    - name: BOOTSTRAP_DB
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: BOOTSTRAP_DB
+    - name: BOOTSTRAP_POSTGRES_HOST
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: BOOTSTRAP_POSTGRES_HOST
+    - name: BOOTSTRAP_POSTGRES_PORT
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: BOOTSTRAP_POSTGRES_PORT
+    - name: BOOTSTRAP_POSTGRES_ADMIN_DB
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: BOOTSTRAP_POSTGRES_ADMIN_DB
+    - name: BOOTSTRAP_POSTGRES_ADMIN_USER
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: BOOTSTRAP_POSTGRES_ADMIN_USER
+    - name: BOOTSTRAP_POSTGRES_ADMIN_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: BOOTSTRAP_POSTGRES_ADMIN_PASSWORD
+    - name: RESET_PASSWORD_BASE_URL
+      valueFrom:
+        secretKeyRef:
+          name: employee-leave-secrets
+          key: RESET_PASSWORD_BASE_URL
   resources:
     requests:
       cpu: "100m"
@@ -120,6 +181,23 @@ frontend:
 
 imagePullSecrets:
   - name: ghcr-pull-secret
+
+secrets:
+  adminEmail: "admin"
+  adminPassword: "admin"
+  postgresHost: "postgres.postgress.svc.cluster.local"
+  postgresPort: "5432"
+  postgresDatabase: "concedii"
+  postgresUser: "concedii"
+  postgresPassword: "concedii"
+  databaseUrl: "postgresql+psycopg://concedii:concedii@postgres.postgress.svc.cluster.local:5432/concedii"
+  bootstrapDb: "true"
+  bootstrapPostgresHost: "postgres.postgress.svc.cluster.local"
+  bootstrapPostgresPort: "5432"
+  bootstrapPostgresAdminDb: "postgres"
+  bootstrapPostgresAdminUser: "devops"
+  bootstrapPostgresAdminPassword: "gaz"
+  resetPasswordBaseUrl: "http://employee-leave.local/reset.html"
 
 # Prometheus (kube-prometheus-stack) wiring for external scrape configs
 kube-prometheus-stack:
