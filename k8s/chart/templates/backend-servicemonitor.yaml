@@ -1,0 +1,25 @@
+{{- $svcMon := .Values.backend.serviceMonitor }}
+{{- if $svcMon.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ default (printf "%s-monitor" .Values.backend.name) $svcMon.name }}
+  namespace: {{ default "monitoring" $svcMon.namespace }}
+  labels:
+    release: {{ default "monitoring" $svcMon.releaseLabel }}
+    {{- with $svcMon.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.selectorLabel }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Values.namespace }}
+  endpoints:
+    - port: {{ default "http" $svcMon.portName | quote }}
+      path: {{ default "/metrics" $svcMon.path | quote }}
+      interval: {{ default "15s" $svcMon.interval | quote }}
+{{- end }}
+
