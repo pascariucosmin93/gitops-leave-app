@@ -11,7 +11,7 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: {{ .Values.frontend.port }}
+    - port: {{ .Values.frontend.servicePort | default 80 }}
       targetPort: {{ .Values.frontend.port }}
   type: {{ .Values.frontend.service.type }}
   {{- if .Values.frontend.service.loadBalancerIP }}
