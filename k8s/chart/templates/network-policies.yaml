@@ -76,11 +76,12 @@ spec:
         - protocol: TCP
           port: 53
     - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: postgress
       ports:
         - protocol: TCP
-          port: 3306
+          port: 5432
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
