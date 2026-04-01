@@ -3,10 +3,18 @@ kind: Service
 metadata:
   name: frontend-service
   namespace: {{ .Values.namespace }}
+  {{- with .Values.frontend.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   selector:
     app: frontend
   ports:
     - port: {{ .Values.frontend.port }}
       targetPort: {{ .Values.frontend.port }}
-  type: ClusterIP
+  type: {{ .Values.frontend.service.type }}
+  {{- if .Values.frontend.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.frontend.service.loadBalancerIP }}
+  {{- end }}
+  externalTrafficPolicy: {{ .Values.frontend.service.externalTrafficPolicy }}
