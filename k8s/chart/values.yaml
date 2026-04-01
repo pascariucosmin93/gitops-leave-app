@@ -1,6 +1,6 @@
 versions:
-  image: "0.0.1"
-  promote: "0.0"
+  image: "1.0.0"
+  promote: "1.0"
 
 namespace: employee-leave
 
