@@ -136,7 +136,7 @@ backend:
     prometheus.io/port: "5000"
     prometheus.io/path: "/metrics"
   serviceMonitor:
-    enabled: true
+    enabled: false
     name: ""
     namespace: monitoring
     releaseLabel: monitoring

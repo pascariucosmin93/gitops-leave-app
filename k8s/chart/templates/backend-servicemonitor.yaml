@@ -1,5 +1,5 @@
 {{- $svcMon := .Values.backend.serviceMonitor }}
-{{- if $svcMon.enabled }}
+{{- if and $svcMon.enabled (.Capabilities.APIVersions.Has "monitoring.coreos.com/v1/ServiceMonitor") }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -22,4 +22,3 @@ spec:
       path: {{ default "/metrics" $svcMon.path | quote }}
       interval: {{ default "15s" $svcMon.interval | quote }}
 {{- end }}
-
