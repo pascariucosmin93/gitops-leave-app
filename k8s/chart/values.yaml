@@ -12,6 +12,7 @@ backend:
   port: 5000
   servicePortName: http
   secretName: employee-leave-secrets
+  adminSecretName: employee-leave-admin-secret
   selectorLabel: backend
   strategy:
     type: RollingUpdate
@@ -184,8 +185,6 @@ imagePullSecrets:
   - name: ghcr-pull-secret
 
 secrets:
-  adminEmail: "admin@gmail.com"
-  adminPassword: "admin"
   postgresHost: "postgres.postgress.svc.cluster.local"
   postgresPort: "5432"
   postgresDatabase: "concedii"

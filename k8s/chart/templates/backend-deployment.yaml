@@ -33,6 +33,8 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ .Values.backend.secretName }}
+            - secretRef:
+                name: {{ .Values.backend.adminSecretName }}
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
           {{- if .Values.backend.probes.startup }}
