@@ -184,7 +184,7 @@ imagePullSecrets:
   - name: ghcr-pull-secret
 
 secrets:
-  adminEmail: "admin"
+  adminEmail: "admin@gmail.com"
   adminPassword: "admin"
   postgresHost: "postgres.postgress.svc.cluster.local"
   postgresPort: "5432"
