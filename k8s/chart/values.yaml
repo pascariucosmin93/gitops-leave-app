@@ -109,7 +109,7 @@ backend:
   probes:
     startup:
       httpGet:
-        path: /api/healthz
+        path: /api/healthz/live
         port: 5000
       initialDelaySeconds: 10
       periodSeconds: 5
@@ -117,7 +117,7 @@ backend:
       failureThreshold: 24
     liveness:
       httpGet:
-        path: /api/healthz
+        path: /api/healthz/live
         port: 5000
       initialDelaySeconds: 60
       periodSeconds: 30
@@ -125,7 +125,7 @@ backend:
       failureThreshold: 5
     readiness:
       httpGet:
-        path: /api/healthz
+        path: /api/healthz/ready
         port: 5000
       initialDelaySeconds: 40
       periodSeconds: 10
