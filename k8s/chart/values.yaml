@@ -1,5 +1,5 @@
 versions:
-  image: "1.0.0"
+  image: "1.0.1"
   promote: "1.0"
 
 namespace: employee-leave
