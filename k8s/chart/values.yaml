@@ -1,13 +1,13 @@
 versions:
-  image: "1.1.9"
-  promote: "1.1"
+  image: "1.2.0"
+  promote: "1.2"
 
 namespace: employee-leave
 
 backend:
   name: employee-leave-backend
   image: ghcr.io/pascariucosmin93/employee-leave-backend
-  tag: "1.1.9"
+  tag: "1.2.0"
   replicaCount: 2
   port: 5000
   servicePortName: http
@@ -157,7 +157,7 @@ backend:
 
 frontend:
   image: ghcr.io/pascariucosmin93/employee-leave-frontend
-  tag: "1.1.9"
+  tag: "1.2.0"
   replicaCount: 2
   port: 8080
   servicePort: 80
