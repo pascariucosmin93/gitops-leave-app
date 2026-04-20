@@ -24,6 +24,10 @@ spec:
       containers:
         - name: {{ .Values.backend.name }}
           image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
           ports:
             - containerPort: {{ .Values.backend.port }}
           {{- if .Values.backend.env }}
